@@ -1,0 +1,77 @@
+---
+title: "Jail"
+author: "WeiXiao Sun"
+date: "2/24/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE,warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+#Data from github repository
+raw_data <- read.csv("incarceration_trends_preded.csv") 
+#load the new data for only time period 2010-2018
+new_data <- raw_data %>% filter(year>=2010) %>% filter(year<=2018)
+```
+
+**code name** : Jail
+
+**Project Title** : Incarceration Trends
+
+**Authors** : WeiXiao Sun
+
+**Affiliation** : INFO-201: Technical Foundations of Informathics - The Information School - University of Washington
+
+**Date** : 2/24/2022
+
+## Introduction 
+
+Nowadays, the entire United States are facing the racial inequality of law. As we have the incarceration data collected by the Vera Institute, we are able to explore how the situation changed with time and whether the situation is getting better in recent years.To exclude the missing value and discover recent trends, I chose to study the data generated from 2010 to 2018.
+
+## Summary Information
+I have used `nrow(data)` to find out the number of observations, which is `num_observations`, and for the the number of variables `num_variables` I used `ncol(data)`to obtain the output. The maximum jail population of black people in 2018 is stored in the variable `max_black_jail_pop_2018`, which I used `new_data %>%filter(year == "2018") %>% select(white_jail_pop) %>% max(na.rm = TRUE)`to find out. For the maximum jail population of white people in 2018, the variable name is `max_white_jail_pop_2018`. Then for the the maximum total jail population in 2018, I have the variable `max_total_jail_pop_2018`, and the maximum total jail admission in 2018 by the variable `max_total_jail_adm_2018`.
+
+The focus of this project was to look at and analyse US prison statistics to learn about the incarceration system and the values and how they change over time. I chose six relevant values of interest from the data, which were the maximum value for the black prison population in 2018, the maximum value for the white prison population in 2018, the maximum value for the total prison population in 2018, the maximum value for total prison admissions in 2018, and the number of observations and variables. Trends in prison change across the United States are observed by looking at production and the effects of numerous independent variables. According to the data, there are 28,251 total observations for the total data as "num_observations" and 27 total variables as "num_variables". 2018 maximum prison population for blacks is "max_black_ jail_pop_2018" and "max_white_jail_pop_2018" for whites in 2018. jail_pop_2018" and the maximum prison admissions in 2018 was "max_total_jail_adm_2018". I focused primarily on the "incarcerated population" and "incarceration rate" by race, as well as their rates. The analysis of the prison population and prison admissions by race allows us to know the current racial population incarceration in US prisons. From there, we can infer the extent and trends of the independent variables on the dependent variable, and thus calculate the impact that racial demographic components have on the U.S. prison system. By analysing this data, we can determine the extent to which multiple factors influence incarceration in the United States. By analysing specific data, we can relate this situation to complex social and political structures in the pursuit of social justice in the true sense of the word.
+
+## Table 
+### What are the top 10 counties had the highest total jail admissions rate from 2010-2018?
+
+As recent year top 10 counties had highest average total jail admissions rates. This represents the number (rate) of times people are sent to prison from each county. Obviously, `Dickens County` should be more careful about putting people in prison and develop a robust system of law.
+
+```{r,warning=FALSE,message=FALSE,echo=FALSE}
+source("../source/analysis.R")
+```
+
+
+## Trends over time chart
+### How the jail population by race changed from 2010 to 2018 in Dickens county.?
+
+**Purpose:** Line Graph: Line graphs are used to track changes in data over time. Line charts can also be used to compare changes in multiple groups over the same time period.
+
+**Insight:** It was created to inform trends over time in Dickens County's racially diverse jail population from 2010 to 2018. This line graph allows us to see how the black, white, and Latino jail populations are trending compared to each other and to see how the jail population by race has changed from 2010 to 2018.
+```{r,warning=FALSE,message=FALSE,echo=FALSE}
+source("../source/analysis.R")
+```
+
+
+## Variable comparison chart
+### How average jail population and jail admission are related?
+
+**Purpose:** Line Graph: Line graphs are used to track changes in data over time. Line charts can also be used to compare changes in multiple groups over the same time period.
+
+**Insight:** It was created to show comparatively trends in prison populations and prison admissions, and how these two different continuous variables are related to each other. The line graph shows the upward trend in both prison population and prison admissions from 1970 onwards and shows the interrelated effects of prison population and prison admissions.
+```{r,warning=FALSE,message=FALSE,echo=FALSE}
+source("../source/analysis.R")
+```
+
+
+## Map
+### What are the white and black people jail population count in 2018 over the U.S.?
+
+**Purpose:** Choropleth Map: The Choropleth map is a thematic map that shows the extent to which summary statistics of interest are located, based on shades of colour.
+
+**Insight:** I have created two maps comparing the geographical distribution of prison population numbers by race separately. This analysis allows us to explore how they are distributed geographically and whether there is a geographical correlation. As you can see from the maps, in 2018, Whites had a high prison population nationwide. There is also a trend towards the central region of the United States. The black prison population is more concentrated in the eastern part of the US than the white population, and therefore local authorities in the eastern part of the US should pay more attention to the racial equality of incarceration.
+```{r,warning=FALSE,message=FALSE,echo=FALSE}
+source("../source/analysis.R")
+```
+

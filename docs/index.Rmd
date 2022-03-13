@@ -14,8 +14,6 @@ library(tidyverse)
 raw_data <- read.csv("incarceration_trends_preded.csv") 
 #I exclude some variables from downloaded file, and only focus on the time peroid 2010-2018
 new_data <- raw_data %>% filter(year>=2010) %>% filter(year<=2018)
-#summary
-skimr::skim(new_data)
 ```
 
 **code name** : Jail
@@ -31,7 +29,6 @@ skimr::skim(new_data)
 ## Summary Information
 I have used `nrow(data)` to find out the number of observations, which is `num_observations`, and for the the number of variables `num_variables` I used `ncol(data)`to obtain the output. The maximum jail population of black people in 2018 is stored in the variable `max_black_jail_pop_2018`, which I used `new_data %>%filter(year == "2018") %>% select(white_jail_pop) %>% max(na.rm = TRUE)`to find out. For the maximum jail population of white people in 2018, the variable name is `max_white_jail_pop_2018`. Then for the the maximum total jail population in 2018, I have the variable `max_total_jail_pop_2018`, and the maximum total jail admission in 2018 by the variable `max_total_jail_adm_2018`.
 
-The focus of this project was to look at and analyse US prison statistics to learn about the incarceration system and the values and how they change over time. I chose six relevant values of interest from the data, which were the maximum value for the black prison population in 2018, the maximum value for the white prison population in 2018, the maximum value for the total prison population in 2018, the maximum value for total prison admissions in 2018, and the number of observations and variables. Trends in prison change across the United States are observed by looking at production and the effects of numerous independent variables. According to the data, there are 28,251 total observations for the total data as "num_observations" and 27 total variables as "num_variables". 2018 maximum prison population for blacks is "max_black_ jail_pop_2018" and "max_white_jail_pop_2018" for whites in 2018. jail_pop_2018" and the maximum prison admissions in 2018 was "max_total_jail_adm_2018". I focused primarily on the "incarcerated population" and "incarceration rate" by race, as well as their rates. The analysis of the prison population and prison admissions by race allows us to know the current racial population incarceration in US prisons. From there, we can infer the extent and trends of the independent variables on the dependent variable, and thus calculate the impact that racial demographic components have on the U.S. prison system. By analysing this data, we can determine the extent to which multiple factors influence incarceration in the United States. By analysing specific data, we can relate this situation to complex social and political structures in the pursuit of social justice in the true sense of the word.
 ```{r,warning=FALSE,message=FALSE}
 num_observations <- nrow(new_data)
 num_variables <- ncol(new_data)
@@ -52,6 +49,10 @@ max_total_jail_adm_2018 <- new_data %>%
   select(total_jail_adm) %>%
   max(na.rm = TRUE)
 ```
+
+The focus of this project was to look at and analyse US prison statistics to learn about the incarceration system and the values and how they change over time. I chose six relevant values of interest from the data. According to the data, there are 28,251 total observations for the total data and 27 total variables. 2018 maximum prison population for blacks is 5024 and for maximum whites jail population in 2018 is 4577.  The maximum population rate in 2018 is 17208 and the maximum prison admissions in 2018 is 137092.
+
+I focused primarily on the "incarcerated population" and "incarceration rate" by race, as well as their rates. The analysis of the prison population and prison admissions by race allows us to know the current racial population incarceration in US prisons. From there, we can infer the extent and trends of the independent variables on the dependent variable, and thus calculate the impact that racial demographic components have on the U.S. prison system. By analysing this data, we can determine the extent to which multiple factors influence incarceration in the United States. By analysing specific data, we can relate this situation to complex social and political structures in the pursuit of social justice in the true sense of the word.
 
 ## Table 
 ### What are the top 10 counties had the highest total jail admissions rate from 2010-2018?
@@ -83,6 +84,7 @@ scale_y_discrete(position = "left")+
 **Insight:** It was created to inform trends over time in Dickens County's racially diverse jail population from 2010 to 2018. This line graph allows us to see how the black, white, and Latino jail populations are trending compared to each other and to see how the jail population by race has changed from 2010 to 2018.
 
 ```{r,warning=FALSE,message=FALSE}
+library(reshape2)
 Rp <- new_data %>% filter(county_name=="Dickens County")  %>% group_by(county_name,year) %>% summarise(
   Black=mean(black_jail_pop,na.rm=TRUE),
   Latinx=mean(latinx_jail_pop,na.rm=TRUE),

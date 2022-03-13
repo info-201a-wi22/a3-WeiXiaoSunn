@@ -24,7 +24,14 @@ max_total_jail_adm_2018 <- new_data %>%
   filter(year == "2018") %>%
   select(total_jail_adm) %>%
   max(na.rm = TRUE)
-
+Text <- paste("The focus of this project was to look at and analyse US prison statistics 
+to learn about the incarceration system and the values and how they change over time. 
+I chose six relevant values of interest from the data. According to the data, there 
+are 28,251 total observations for the total data and 27 total variables. 2018 maximum 
+prison population for blacks is 5024 and for maximum whites jail population in 2018 
+is 4577.  The maximum population rate in 2018 is 17208 and the maximum prison admissions 
+in 2018 is 137092.")
+retuen(cat(text))
 
 # Table 
 # What are the top 10 counties had the highest total jail admissions rate from 2010-2018?
@@ -46,6 +53,7 @@ ggplot(top10) +
 
 # Trends over time chart
 # How the jail population by race changed from 2010 to 2018 in Dickens county.?
+library(reshape2)
 Rp <- new_data %>% filter(county_name=="Dickens County")  %>% group_by(county_name,year) %>% summarise(
   Black=mean(black_jail_pop,na.rm=TRUE),
   Latinx=mean(latinx_jail_pop,na.rm=TRUE),
